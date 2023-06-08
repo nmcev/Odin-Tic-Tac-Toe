@@ -2,7 +2,26 @@ const boxes = document.getElementsByClassName('box')
 
 const gameBoard = (() => {
     const gameResult = ["", "", "", "", "", "", "", "", ""];
-    return { gameResult }
+    //rows condition 
+    function checkWinner() {
+        if ((gameResult[0] !== "" && gameResult[0] == gameResult[3] && gameResult[3] == gameResult[6]) ||
+            (gameResult[1] !== "" && gameResult[1] == gameResult[4] && gameResult[4] == gameResult[7]) ||
+            (gameResult[2] !== "" && gameResult[2] == gameResult[5] && gameResult[5] == gameResult[8])
+        ) {
+            alert("Win");
+        } // column condition 
+        else if (
+            (gameResult[0] !== "" && gameResult[0] == gameResult[1] && gameResult[1] == gameResult[2]) ||
+            (gameResult[3] !== "" && gameResult[3] == gameResult[4] && gameResult[4] == gameResult[5]) ||
+            (gameResult[6] !== "" && gameResult[6] == gameResult[7] && gameResult[7] == gameResult[8])
+        ) {
+            alert("Win")
+        }
+        else {
+            //Tie condition 
+        }
+    }
+    return { gameResult, checkWinner }
 })();
 
 const GameBoard = gameBoard;
@@ -33,6 +52,8 @@ function addMark() {
                 boxes[i].textContent = "o";
                 renderContents(gameResult[i]);
                 boxes[i].removeEventListener("click", renderMark);
+                gameResult[i] = boxes[i].textContent;
+                gameBoard.checkWinner();
             });
         }
         boxes[i].addEventListener("mouseenter", function () { // mouseenter as hover
