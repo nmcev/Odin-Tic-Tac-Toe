@@ -39,10 +39,10 @@ li:hover {
     background: url('assets/blobanimation.svg') no-repeat center / cover;
     /* Add this line */
     /* background-color: #000000bc; */
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    justify-content: center !important;
-    align-items: center !important;
+    justify-content: center;
+    align-items: center;
     font-weight: 100;
     color: #262626;
     margin-bottom: 10px;
@@ -55,7 +55,7 @@ li:hover {
     height: 50vh;
     width: 25vw;
     /* grid three column three rows */
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     background-color: white;
@@ -66,8 +66,8 @@ li:hover {
     border: 1px solid black;
     width: calc(100% - 2px);
     height: calc(100% - 2px);
-    display: flex !important;
-    justify-content: center !important;
+    display: flex;
+    justify-content: center;
     align-items: center;
     font-size: 26px;
 }
@@ -87,13 +87,13 @@ li:hover {
 .box8,
 .box9 {
     border-right: none;
-    border-left: none !important;
+    border-left: none;
 }
 
 .box1,
 .box7,
 .box4 {
-    border-top: none !important;
+    border-top: none;
 }
 
 .box3,
@@ -104,11 +104,30 @@ li:hover {
 
 .footer {
     display: flex;
-    justify-content: center !important;
+    justify-content: center;
     background-color: #3F3F3F;
     width: calc(98.2vw + 1vw);
     height: 190%;
     margin-top: 2em;
     color: #eee;
     font-weight: 100;
+}
+
+@media screen and (max-width: 768px) {
+    .board {
+        width: 90vw;
+    }
+
+    .footer {
+        width: 100vw;
+    }
+
+    .icons {
+        position: static;
+        top: 0;
+    }
+
+    .header {
+        text-align: center;
+    }
 }
