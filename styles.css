@@ -50,6 +50,12 @@ li:hover {
     padding: 15px;
 }
 
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .board {
     border: 1px solid black;
     height: 50vh;
@@ -120,8 +126,16 @@ li:hover {
 }
 
 @media screen and (max-width: 768px) {
+    /*this will apply under 768px */
+    .game {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
     .board {
-        width: 90vw;
+        width: 60vw;
+        height: 40vh;
     }
 
     .footer {
