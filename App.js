@@ -19,3 +19,20 @@ const Player = (name, marker) => {
         getMarker,
     }
 }
+
+function renderContents(gameResult) {
+    for (let i = 0; i < gameResult.length; i++) {
+        boxes[i].textContent = gameResult[i]
+    }
+}
+
+function addMark() {
+    for (let i = 0; i < gameResult.length; i++) {
+        boxes[i].addEventListener("click", () => {
+            boxes[i].textContent = "X";
+            renderContents(gameResult[i])
+            console.log(gameResult)
+        })
+    }
+}
+addMark()
