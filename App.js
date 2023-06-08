@@ -28,11 +28,13 @@ function renderContents(gameResult) {
 
 function addMark() {
     for (let i = 0; i < gameResult.length; i++) {
-        boxes[i].addEventListener("click", () => {
-            boxes[i].textContent = "X";
-            renderContents(gameResult[i])
-            console.log(gameResult)
-        })
+        if (boxes[i].textContent == "" && gameResult[i] == "") {
+            boxes[i].addEventListener("click", function renderMark() {
+                boxes[i].textContent = "o";
+                renderContents(gameResult[i]);
+                boxes[i].removeEventListener("click", renderMark);
+            });
+        }
     }
 }
 addMark()
