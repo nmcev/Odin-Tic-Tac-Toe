@@ -19,8 +19,8 @@
     <!-- header icons -->
     <div class="icons">
         <ul>
-            <li><a href="https://github.com/nmcev/Odin-Tic-Tac-Toe" target="_blank"><img src="assets/github-142-svgrepo-com.svg"
-                        alt=""></a></li>
+            <li><a href="https://github.com/nmcev/Odin-Tic-Tac-Toe" target="_blank"><img
+                        src="assets/github-142-svgrepo-com.svg" alt=""></a></li>
         </ul>
     </div>
     <!-- header icons -->
@@ -32,8 +32,22 @@
         <div class="header-board">
             <header class="header">
                 <h1>Tic-Tac-Toe</h1>
-                <p>X's Turn</p>
+                <p class="mark-turn">X's Turn</p>
             </header>
+
+            <div class="inputs">
+                <div class="player-one">
+                    <label for="">player One</label>
+                    <input id="player-one-name" type="text" name="name" id="name" placeholder="Enter your name">
+                </div>
+                <div class="player-two">
+                    <label for="">Player Two</label>
+                    <input id="player-two-name" type="text" name="name" id="name" placeholder="Enter your name">
+                </div>
+            </div>
+            <div class="start-btn">
+                <button id="start-game" type="button">Start Game</button>
+            </div>
 
             <!-- game -->
             <div class="game">
