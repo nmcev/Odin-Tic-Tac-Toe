@@ -35,6 +35,14 @@ function addMark() {
                 boxes[i].removeEventListener("click", renderMark);
             });
         }
+        boxes[i].addEventListener("mouseenter", function () { // mouseenter as hover
+            if (boxes[i].textContent === "") {
+                boxes[i].classList.add("square");
+            }
+        });
+        boxes[i].addEventListener("mouseleave", function () {
+            boxes[i].classList.remove("square");
+        });
     }
 }
 addMark()

@@ -70,10 +70,16 @@ li:hover {
     justify-content: center;
     align-items: center;
     font-size: 26px;
+
 }
 
-.box:hover {
+.square {
+    transition: 0.35s;
+}
+
+.square:hover {
     cursor: pointer;
+    background-color: #26262620;
 }
 
 .box1,
