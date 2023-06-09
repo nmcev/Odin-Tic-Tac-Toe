@@ -77,7 +77,8 @@ li:hover {
     justify-content: center;
     align-items: center;
     font-size: 26px;
-
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .square {
@@ -93,14 +94,12 @@ li:hover {
 .box2,
 .box3 {
     border-left: none;
-    border-right: none;
 }
 
 .box7,
 .box8,
 .box9 {
     border-right: none;
-    border-left: none;
 }
 
 .box1,
@@ -128,7 +127,7 @@ li:hover {
 
 .inputs {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-bottom: 5px;
 }
 
