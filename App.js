@@ -6,6 +6,11 @@ const winner = document.getElementById('winner');
 const inputs = document.getElementsByClassName("inputs")
 const startGameBtn = document.getElementById('start-game')
 const resetGameBtn = document.getElementById('reset-game')
+
+let currentPlayer;
+let playerOne;
+let playerTwo;
+
 resetGameBtn.style.display = 'none';
 const gameBoard = (() => {
     const gameResult = ["", "", "", "", "", "", "", "", ""];
@@ -73,7 +78,43 @@ const gameBoard = (() => {
             turn.textContent = "X";
         }
     }
-    return { gameResult, checkWinner, switchTurns }
+
+    function resetGame() {
+        for (let i = 0; i < gameResult.length; i++) {
+            gameResult[i] = '';
+            boxes[i].textContent = '';
+        }
+        winner.textContent = '';
+        currentPlayer = playerOne;
+        enableClicks();
+    }
+    function enableClicks() {
+        for (let i = 0; i < boxes.length; i++) {
+            boxes[i].style.pointerEvents = 'auto';
+        }
+    }
+    function disableClicks() {
+        const boxes = document.getElementsByClassName('box');
+        for (let i = 0; i < boxes.length; i++) {
+            boxes[i].removeEventListener('click', addMark);
+            boxes[i].style.pointerEvents = 'none';
+        }
+    }
+
+    function renderContents(gameResult) {
+        for (let i = 0; i < gameResult.length; i++) {
+            boxes[i].textContent = gameResult[i]
+        }
+    }
+    return {
+        gameResult,
+        checkWinner,
+        switchTurns,
+        resetGame,
+        enableClicks,
+        disableClicks,
+        renderContents,
+    };
 })();
 
 const GameBoard = gameBoard;
@@ -91,12 +132,6 @@ const Player = (name, marker) => {
     }
 }
 
-function renderContents(gameResult) {
-    for (let i = 0; i < gameResult.length; i++) {
-        boxes[i].textContent = gameResult[i]
-    }
-}
-
 function addMark() {
     for (let i = 0; i < gameResult.length; i++) {
         if (boxes[i].textContent == "" && gameResult[i] == "") {
@@ -108,11 +143,11 @@ function addMark() {
                 else if (currentPlayer == playerTwo) {
                     currentPlayer = playerOne
                 }
-                renderContents(gameResult[i]);
+                GameBoard.renderContents(gameResult[i]);
                 boxes[i].removeEventListener("click", renderMark);
                 gameResult[i] = boxes[i].textContent;
-                gameBoard.switchTurns();
-                gameBoard.checkWinner();
+                GameBoard.switchTurns();
+                GameBoard.checkWinner();
             });
         }
         boxes[i].addEventListener("mouseenter", function () { // mouseenter as hover
@@ -125,9 +160,6 @@ function addMark() {
         });
     }
 }
-let currentPlayer;
-let playerOne;
-let playerTwo;
 
 startGameBtn.addEventListener("click", function () {
     playerOne = Player(p1Name.value, "X");
@@ -140,32 +172,8 @@ startGameBtn.addEventListener("click", function () {
     }
 });
 
-function disableClicks() {
-    const boxes = document.getElementsByClassName('box');
-    for (let i = 0; i < boxes.length; i++) {
-        boxes[i].removeEventListener('click', addMark);
-        boxes[i].style.pointerEvents = 'none';
-    }
-}
-function resetGame() {
-    for (let i = 0; i < gameResult.length; i++) {
-        gameResult[i] = '';
-        boxes[i].textContent = '';
-    }
-    winner.textContent = '';
-    currentPlayer = playerOne;
-    enableClicks();
-}
-
-
-function enableClicks() {
-    for (let i = 0; i < boxes.length; i++) {
-        boxes[i].style.pointerEvents = 'auto';
-    }
-}
-
 resetGameBtn.addEventListener("click", () => {
-    resetGame();
+    GameBoard.resetGame();
     resetGameBtn.style.display = "none";
     startGameBtn.style.display = "block"
     for (let i = 0; i < inputs.length; i++) {
