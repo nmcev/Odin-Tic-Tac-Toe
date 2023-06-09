@@ -3,6 +3,10 @@ const turn = document.getElementById('turn');
 const p1Name = document.getElementById('player-one-name')
 const p2Name = document.getElementById('player-two-name')
 const winner = document.getElementById('winner');
+const inputs = document.getElementsByClassName("inputs")
+const startGameBtn = document.getElementById('start-game')
+const resetGameBtn = document.getElementById('reset-game')
+resetGameBtn.style.display = 'none';
 const gameBoard = (() => {
     const gameResult = ["", "", "", "", "", "", "", "", ""];
     function checkWinner() {
@@ -21,6 +25,7 @@ const gameBoard = (() => {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
             disableClicks();
+            resetGameBtn.style.display = 'block';
             return;
         } else if (
             (gameResult[0] !== "" && gameResult[0] == gameResult[1] && gameResult[1] == gameResult[2]) ||
@@ -36,6 +41,7 @@ const gameBoard = (() => {
             } else {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
+            resetGameBtn.style.display = 'block';
             disableClicks();
             return;
         } else if (
@@ -50,10 +56,12 @@ const gameBoard = (() => {
             } else {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
+            resetGameBtn.style.display = 'block';
             disableClicks();
             return;
         } else if (gameResult.every((result) => result !== "")) {
             winner.textContent = "It's a tie";
+            resetGameBtn.style.display = 'block';
             disableClicks();
             return;
         }
@@ -121,8 +129,12 @@ const playerOne = Player(p1Name.value, "X");
 const playerTwo = Player(p2Name.value, "O");
 
 let currentPlayer = playerOne;
-document.getElementById('start-game').addEventListener("click", function () {
+startGameBtn.addEventListener("click", function () {
     addMark();
+    startGameBtn.style.display = "none";
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].style.display = "none"
+    }
 });
 
 function disableClicks() {
@@ -132,3 +144,30 @@ function disableClicks() {
         boxes[i].style.pointerEvents = 'none';
     }
 }
+function resetGame() {
+    for (let i = 0; i < gameResult.length; i++) {
+        gameResult[i] = '';
+        boxes[i].textContent = '';
+    }
+    winner.textContent = '';
+    currentPlayer = playerOne;
+    enableClicks();
+}
+
+
+function enableClicks() {
+    for (let i = 0; i < boxes.length; i++) {
+        boxes[i].style.pointerEvents = 'auto';
+    }
+}
+
+resetGameBtn.addEventListener("click", () => {
+    resetGame();
+    resetGameBtn.style.display = "none";
+    startGameBtn.style.display = "block"
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].style.display = "flex";
+        boxes[i].style.justifyContent = "space-around";
+        boxes[i].style.marginBottom = "5px";
+    }
+}); 
