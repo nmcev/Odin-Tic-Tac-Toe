@@ -159,9 +159,14 @@ li:hover {
         align-items: center;
     }
 
+    .box {
+        height: 16vh;
+    }
+
     .board {
-        width: 75vw;
-        height: 40vh;
+        width: 80vw;
+        max-width: 75vw;
+        margin: 0 auto;
     }
 
     .footer {
@@ -170,8 +175,16 @@ li:hover {
     }
 
     .icons {
-        position: static;
+        margin-top: 70px;
+        position: sticky;
         top: 0;
+        background-color: #262626c0;
+        width: 55.5vh;
+        margin-bottom: 40px;
+    }
+    .icons li{
+        position: static;
+        right: 40px;
     }
 
     .header {
