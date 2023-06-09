@@ -96,7 +96,6 @@ const gameBoard = (() => {
     function disableClicks() {
         const boxes = document.getElementsByClassName('box');
         for (let i = 0; i < boxes.length; i++) {
-            boxes[i].removeEventListener('click', addMark);
             boxes[i].style.pointerEvents = 'none';
         }
     }
