@@ -71,7 +71,8 @@ const gameBoard = (() => {
             return;
         }
     }
-    function switchTurns() {
+    function switchTextTurns() {
+        // switchTextTurns() : a function to switch paragraph of X's turn and O's  turn
         if (currentPlayer.getMarker() == "X") {
             turn.textContent = "X's Turn";
         } else if (currentPlayer.getMarker() == "O") {
@@ -89,18 +90,20 @@ const gameBoard = (() => {
         enableClicks();
     }
     function enableClicks() {
+        // enableClicks() : a  function to restart clicking after disable it by clicking on reset game button
         for (let i = 0; i < boxes.length; i++) {
             boxes[i].style.pointerEvents = 'auto';
         }
     }
     function disableClicks() {
-        const boxes = document.getElementsByClassName('box');
+        // disableClicks : a function to disable clicks after finished the game 
         for (let i = 0; i < boxes.length; i++) {
             boxes[i].style.pointerEvents = 'none';
         }
     }
 
     function renderContents(gameResult) {
+        // renderContents(gameResult) : a function to render the X's and O's in the board 
         for (let i = 0; i < gameResult.length; i++) {
             boxes[i].textContent = gameResult[i]
         }
@@ -108,7 +111,7 @@ const gameBoard = (() => {
     return {
         gameResult,
         checkWinner,
-        switchTurns,
+        switchTextTurns,
         resetGame,
         enableClicks,
         disableClicks,
@@ -143,9 +146,9 @@ function addMark() {
                     currentPlayer = playerOne
                 }
                 GameBoard.renderContents(gameResult[i]);
-                boxes[i].removeEventListener("click", renderMark);
-                gameResult[i] = boxes[i].textContent;
-                GameBoard.switchTurns();
+                boxes[i].removeEventListener("click", renderMark);//to not click over filled box 
+                gameResult[i] = boxes[i].textContent; // assign X's and O's from board to the array inside gameBoard
+                GameBoard.switchTextTurns();
                 GameBoard.checkWinner();
             });
         }
