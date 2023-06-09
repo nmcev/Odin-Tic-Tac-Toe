@@ -163,8 +163,8 @@ function addMark() {
 
 startGameBtn.addEventListener("click", function () {
     turn.textContent = "X's Turn";
-    playerOne = Player(p1Name.value, "X");
-    playerTwo = Player(p2Name.value, "O");
+    playerOne = Player(p1Name.value || "Player One", "X");
+    playerTwo = Player(p2Name.value || "Player Two", "O");
     currentPlayer = playerOne;
     addMark();
     startGameBtn.style.display = "none";
