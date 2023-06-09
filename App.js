@@ -20,6 +20,8 @@ const gameBoard = (() => {
             } else {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
+            disableClicks();
+            return;
         } else if (
             (gameResult[0] !== "" && gameResult[0] == gameResult[1] && gameResult[1] == gameResult[2]) ||
             (gameResult[3] !== "" && gameResult[3] == gameResult[4] && gameResult[4] == gameResult[5]) ||
@@ -34,6 +36,8 @@ const gameBoard = (() => {
             } else {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
+            disableClicks();
+            return;
         } else if (
             (gameResult[0] !== "" && gameResult[0] == gameResult[4] && gameResult[4] == gameResult[8]) ||
             (gameResult[6] !== "" && gameResult[6] == gameResult[4] && gameResult[4] == gameResult[2])
@@ -46,8 +50,12 @@ const gameBoard = (() => {
             } else {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
+            disableClicks();
+            return;
         } else if (gameResult.every((result) => result !== "")) {
             winner.textContent = "It's a tie";
+            disableClicks();
+            return;
         }
     }
     function switchTurns() {
@@ -116,3 +124,11 @@ let currentPlayer = playerOne;
 document.getElementById('start-game').addEventListener("click", function () {
     addMark();
 });
+
+function disableClicks() {
+    const boxes = document.getElementsByClassName('box');
+    for (let i = 0; i < boxes.length; i++) {
+        boxes[i].removeEventListener('click', addMark);
+        boxes[i].style.pointerEvents = 'none';
+    }
+}
