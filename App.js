@@ -125,11 +125,14 @@ function addMark() {
         });
     }
 }
-const playerOne = Player(p1Name.value, "X");
-const playerTwo = Player(p2Name.value, "O");
+let currentPlayer;
+let playerOne;
+let playerTwo;
 
-let currentPlayer = playerOne;
 startGameBtn.addEventListener("click", function () {
+    playerOne = Player(p1Name.value, "X");
+    playerTwo = Player(p2Name.value, "O");
+    currentPlayer = playerOne;
     addMark();
     startGameBtn.style.display = "none";
     for (let i = 0; i < inputs.length; i++) {
