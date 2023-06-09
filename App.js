@@ -72,10 +72,10 @@ const gameBoard = (() => {
         }
     }
     function switchTurns() {
-        if (turn.textContent === "X") {
-            turn.textContent = "O";
-        } else if (turn.textContent === "O") {
-            turn.textContent = "X";
+        if (currentPlayer.getMarker() == "X") {
+            turn.textContent = "X's Turn";
+        } else if (currentPlayer.getMarker() == "O") {
+            turn.textContent = "O's Turn";
         }
     }
 
@@ -162,6 +162,7 @@ function addMark() {
 }
 
 startGameBtn.addEventListener("click", function () {
+    turn.textContent = "X's Turn";
     playerOne = Player(p1Name.value, "X");
     playerTwo = Player(p2Name.value, "O");
     currentPlayer = playerOne;
@@ -174,6 +175,7 @@ startGameBtn.addEventListener("click", function () {
 
 resetGameBtn.addEventListener("click", () => {
     GameBoard.resetGame();
+    turn.textContent = "";
     resetGameBtn.style.display = "none";
     startGameBtn.style.display = "block"
     for (let i = 0; i < inputs.length; i++) {
