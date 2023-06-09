@@ -178,13 +178,8 @@ li:hover {
         margin-top: 70px;
         position: sticky;
         top: 0;
-        background-color: #262626c0;
         width: 55.5vh;
         margin-bottom: 40px;
-    }
-    .icons li{
-        position: static;
-        right: 40px;
     }
 
     .header {
