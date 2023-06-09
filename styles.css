@@ -61,7 +61,6 @@ li:hover {
     border: 1px solid black;
     height: 50vh;
     width: 25vw;
-    /* grid three column three rows */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -71,14 +70,13 @@ li:hover {
 
 .box {
     border: 1px solid black;
-    width: calc(100% - 2px);
-    height: calc(100% - 2px);
+    width: 100%;
+    height: 16vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 26px;
     padding: 0;
-    box-sizing: border-box;
 }
 
 .square {
@@ -193,6 +191,7 @@ li:hover {
         position: relative;
         right: 2.1em;
     }
+
     .player-one,
     .player-two {
         display: flex;

@@ -171,6 +171,5 @@ resetGameBtn.addEventListener("click", () => {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].style.display = "flex";
         boxes[i].style.justifyContent = "space-around";
-        boxes[i].style.marginBottom = "5px";
     }
 }); 
