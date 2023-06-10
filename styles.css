@@ -237,9 +237,11 @@ li:hover {
 
 .reset-game{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 16px;
+    gap: 8px
 }
 .reset-btn {
     display: inline-block;
@@ -249,8 +251,8 @@ li:hover {
     border-radius: 3px;
     padding: 12px 24px;
     border: 0;
-    color: #fff;
-    background: #ff5000;
+    color: #000000;
+    background: rgb(242, 236, 80);
     line-height: 1.15;
     font-size: 16px;
 
@@ -259,4 +261,23 @@ li:hover {
 .reset-btn:hover {
     transition: all .1s ease;
     box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+}
+
+.finish-btn {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 12px 24px;
+    border: 0;
+    color: #fff;
+    background: #fc1616;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+.finish-bt:hover {
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 #fff, 0 0 0 3px #7f9337;
 }
