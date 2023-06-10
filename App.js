@@ -6,12 +6,13 @@ const winner = document.getElementById('winner');
 const inputs = document.getElementsByClassName("inputs")
 const startGameBtn = document.getElementById('start-game')
 const resetGameBtn = document.getElementById('reset-game')
-
+const finishGameButton = document.getElementById('finish-game');
 let currentPlayer;
 let playerOne;
 let playerTwo;
 
 resetGameBtn.style.display = 'none';
+finishGameButton.style.display = 'none';
 const gameBoard = (() => {
     const gameResult = ["", "", "", "", "", "", "", "", ""];
     function checkWinner() {
@@ -31,6 +32,7 @@ const gameBoard = (() => {
             }
             disableClicks();
             resetGameBtn.style.display = 'block';
+            finishGameButton.style.display = 'block';
             return;
         } else if (
             (gameResult[0] !== "" && gameResult[0] == gameResult[1] && gameResult[1] == gameResult[2]) ||
@@ -47,6 +49,7 @@ const gameBoard = (() => {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
             resetGameBtn.style.display = 'block';
+            finishGameButton.style.display = 'block';
             disableClicks();
             return;
         } else if (
@@ -62,11 +65,13 @@ const gameBoard = (() => {
                 winner.textContent = `${playerTwo.getName()}  is the winner`;
             }
             resetGameBtn.style.display = 'block';
+            finishGameButton.style.display = 'block';
             disableClicks();
             return;
         } else if (gameResult.every((result) => result !== "")) {
             winner.textContent = "It's a tie";
             resetGameBtn.style.display = 'block';
+            finishGameButton.style.display = 'block';
             disableClicks();
             return;
         }
@@ -85,9 +90,15 @@ const gameBoard = (() => {
             gameResult[i] = '';
             boxes[i].textContent = '';
         }
+        disableClicks();
         winner.textContent = '';
         currentPlayer = playerOne;
+        addMark();
         enableClicks();
+        for (let j = 0; j < inputs.length; j++) {
+            inputs[j].style.display = 'none';
+        }
+        startGameBtn.style.display = 'none';
     }
     function enableClicks() {
         // enableClicks() : a  function to restart clicking after disable it by clicking on reset game button
@@ -108,6 +119,23 @@ const gameBoard = (() => {
             boxes[i].textContent = gameResult[i]
         }
     }
+    function finishGame() {
+        resetGameBtn.style.display = "none";
+        for (let i = 0; i < gameResult.length; i++) {
+            gameResult[i] = "";
+            boxes[i].textContent = "";
+        }
+        enableClicks();
+        finishGameButton.style.display = "none";
+        startGameBtn.style.display = "block";
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.display = "flex";
+            boxes[i].style.justifyContent = "space-around";
+        }
+        winner.textContent = "";
+        disableClicks();
+    }
     return {
         gameResult,
         checkWinner,
@@ -116,6 +144,7 @@ const gameBoard = (() => {
         enableClicks,
         disableClicks,
         renderContents,
+        finishGame,
     };
 })();
 
@@ -136,11 +165,11 @@ const Player = (name, marker) => {
 
 function addMark() {
     for (let i = 0; i < gameResult.length; i++) {
-        if (boxes[i].textContent == "" && gameResult[i] == "") {
+        if (boxes[i].textContent === "" && gameResult[i].length === 0) {
             boxes[i].addEventListener("click", function renderMark() {
                 boxes[i].textContent = currentPlayer.getMarker();
                 if (currentPlayer == playerOne) {
-                    currentPlayer = playerTwo
+                    currentPlayer = playerTwo;
                 }
                 else if (currentPlayer == playerTwo) {
                     currentPlayer = playerOne
@@ -169,6 +198,7 @@ startGameBtn.addEventListener("click", function () {
     playerTwo = Player(p2Name.value || "Player Two", "O");
     currentPlayer = playerOne;
     addMark();
+    GameBoard.enableClicks();
     startGameBtn.style.display = "none";
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].style.display = "none"
@@ -178,10 +208,14 @@ startGameBtn.addEventListener("click", function () {
 resetGameBtn.addEventListener("click", () => {
     GameBoard.resetGame();
     turn.textContent = "";
+    finishGameButton.style.display = "none"
     resetGameBtn.style.display = "none";
-    startGameBtn.style.display = "block"
     for (let i = 0; i < inputs.length; i++) {
-        inputs[i].style.display = "flex";
+        inputs[i].style.display = "none";
         boxes[i].style.justifyContent = "space-around";
     }
-}); 
+});
+
+finishGameButton.addEventListener("click", () => {
+    GameBoard.finishGame();
+})
