@@ -165,8 +165,9 @@ const Player = (name, marker) => {
 
 function addMark() {
     for (let i = 0; i < gameResult.length; i++) {
-        if (boxes[i].textContent === "" && gameResult[i].length === 0) {
+
             boxes[i].addEventListener("click", function renderMark() {
+                        if (boxes[i].textContent === "" && gameResult[i].length === 0) {
                 boxes[i].textContent = currentPlayer.getMarker();
                 if (currentPlayer == playerOne) {
                     currentPlayer = playerTwo;
@@ -179,8 +180,9 @@ function addMark() {
                 gameResult[i] = boxes[i].textContent; // assign X's and O's from board to the array inside gameBoard
                 GameBoard.switchTextTurns();
                 GameBoard.checkWinner();
+                }
             });
-        }
+        
         boxes[i].addEventListener("mouseenter", function () { // mouseenter as hover
             if (boxes[i].textContent === "") {
                 boxes[i].classList.add("square");
